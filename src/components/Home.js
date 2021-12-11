@@ -1,15 +1,23 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import GoogleLogin from 'react-google-login'
+import axios from "axios";
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
-const responseGoogle=(response)=>{
-  console.log(response);
-  console.log(response.profileObj);
-}
+
 
 const Home = () => {
+  const navigate = useNavigate();
 
-  
+  const responseGoogle=async(response)=>{
+    console.log(response.profileObj);
+    const result = await axios.post(`${BASE_URL}/login`, {
+      email: "ss@ss.com",
+      password: "12345",
+    }, {withCredentials: true});
+    navigate('/posts')
+  }
+
   return (
     <div className="home">
       <div className="homeContainer">
@@ -31,7 +39,12 @@ const Home = () => {
             onSuccess={responseGoogle}
             // onFailure={responseGoogle}
             cookiePolicy={"single_host_origin"}
-          />
+          /><br/>
+                    <button style={{width:'100%'}}>
+            <Link style={{ textDecoration: "none", color:'black'}} to="posts">
+              Check Posts
+            </Link>
+          </button>
         </div>
       </div>
     </div>

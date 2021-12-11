@@ -6,14 +6,19 @@ const Posts = () => {
   const navigate = useNavigate();
   const BASE_URL = process.env.REACT_APP_BASE_URL;
   //   const token = SignIn.token;
+  const [error, seterror] = useState(false);
   const [posts, setPosts] = useState([]);
   const getPosts = () => {
     try {
       axios
         .get(`${BASE_URL}/posts`, { withCredentials: true })
         .then((result) => {
-          console.log(result.data);
-          setPosts(result.data);
+          if (result.data.error) {
+            seterror(true);
+          } else {
+            console.log(result.data);
+            setPosts(result.data);
+          }
         });
 
       //   if(result.data.error){
@@ -26,7 +31,9 @@ const Posts = () => {
 
   const logout = async () => {
     try {
-      const result = await axios.get(`${BASE_URL}/logout`);
+      const result = await axios.get(`${BASE_URL}/logout`, {
+        withCredentials: true,
+      });
       console.log(result.data);
       navigate("/");
     } catch (error) {
@@ -47,13 +54,21 @@ const Posts = () => {
         <input type="text" name="todo" />
         <button type="submit">Add</button>
       </form> */}
+        {error ? (
+          <p style={{ marginTop: "50px" }}>Kindly login first to see posts</p>
+        ) : null}
         <div className="posts">
-          {posts.length &&
-            posts.map((item) => {
+          {posts?.map((item) => {
               return (
                 <div key={item._id} className="post">
-                  <img src="https://images.pexels.com/photos/64699/pexels-photo-64699.jpeg" wdith="100" height='100' alt="" />
+                  <img
+                    src="https://images.pexels.com/photos/64699/pexels-photo-64699.jpeg"
+                    wdith="100"
+                    height="100"
+                    alt=""
+                  />
                   <h2 style={{ display: "inline" }}>{item.desc}</h2>
+                  <p>created at {item.createdAt.slice(0,10)}</p>
                   {/* <button onClick={() => del(item._id)}>x</button> */}
                   <br />
                 </div>
@@ -67,7 +82,8 @@ const Posts = () => {
         >
           Back
         </button>
-        <button onClick={logout}>Logout</button>
+        {console.log(error)}
+        {!error ? <button onClick={logout}>Logout</button> : null}
       </div>
     </div>
   );

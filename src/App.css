@@ -66,6 +66,7 @@ form input{
   display: flex;
   flex-direction: column;
   margin: 5px;
+  cursor: pointer;
 }
 
 .blog{
