@@ -12,13 +12,13 @@ const Login = () => {
       const result = await axios.post(`${BASE_URL}/login`, {
         email: e.target.email.value,
         password: e.target.password.value,
-      });
+      }, {withCredentials: true});
       if (result.data.err) {
         setErr(result.data.err);
         // localStorage.setItem("role", result.data.result.role.role);
       } else if (result.data.success) {
-        console.log('yes');
-        // navigate("/posts");
+        console.log('helllllo');
+        navigate("/posts");
       }
     } catch (error) {
       console.log(error);
