@@ -8,8 +8,10 @@ import Activated from './components/Activated'
 import PasswordReset from './components/PasswordReset'
 import Posts from './components/Posts'
 import Post from './components/Post'
+import { useNavigate } from "react-router-dom";
 
 function App() {
+  const navigate = useNavigate();
   return (
     <div className="App">
       <Routes>
@@ -21,7 +23,7 @@ function App() {
         <Route exact path='/forgot/:token' element={<PasswordReset />}/>
         <Route exact path="/post/:id" element={<Post/>}/>
         <Route exact path="/posts" element={<Posts/>}/>
-        <Route path='*' element={<h1>wrong path boy</h1>}/>
+        <Route path='*' element={<><h1>wrong path boy</h1><button onClick={()=>navigate('/')}>Home</button></>}/>
       </Routes>
     </div>
   );

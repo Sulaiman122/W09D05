@@ -17,7 +17,8 @@ const Login = () => {
         setErr(result.data.err);
         // localStorage.setItem("role", result.data.result.role.role);
       } else if (result.data.success) {
-        navigate("/");
+        console.log('yes');
+        // navigate("/posts");
       }
     } catch (error) {
       console.log(error);
