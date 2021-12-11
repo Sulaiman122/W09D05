@@ -2,22 +2,22 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const ForgotPass = () => {
   const navigate = useNavigate();
   const BASE_URL = process.env.REACT_APP_BASE_URL;
   const [err, setErr] = useState("");
-  const login = async (e) => {
+  const reset = async (e) => {
     try {
       e.preventDefault();
-      const result = await axios.post(`${BASE_URL}/login`, {
+      const result = await axios.post(`${BASE_URL}/forgot`, {
         email: e.target.email.value,
-        password: e.target.password.value,
       });
-      if (result.data.err) {
-        setErr(result.data.err);
-        // localStorage.setItem("role", result.data.result.role.role);
-      } else if (result.data.success) {
-        navigate("/");
+      console.log(result.data);
+      if (result.data.success) {
+        setErr(result.data.success);
+      }
+      if (result.data.errors[0].msg) {
+        setErr(result.data.errors[0].msg);
       }
     } catch (error) {
       console.log(error);
@@ -27,19 +27,16 @@ const Login = () => {
   return (
     <div className="home">
       <div className="formm">
-        <h1>Login</h1>
+        <h1>Why did you forget :(</h1>
 
-        <form onSubmit={login}>
+        <form onSubmit={reset}>
+          <h3>Enter email to send you password reset link</h3>
+          <br />
           <label htmlFor="email">Email:</label>
           <input type="email" name="email" />
-          <label htmlFor="password">Password:</label>
-          <input type="password" name="password" />
-          <button type="submit">Login</button>
+          <button type="submit">Send</button>
         </form>
         <p>{err}</p>
-        <p className="forgot" onClick={() => {
-            navigate("/forgot");
-          }}>Forget Password?</p>
         <button
           onClick={() => {
             navigate("/");
@@ -52,4 +49,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ForgotPass;
