@@ -11,10 +11,12 @@ const Home = () => {
 
   const responseGoogle=async(response)=>{
     console.log(response.profileObj);
-    const result = await axios.post(`${BASE_URL}/login`, {
-      email: "ss@ss.com",
-      password: "12345",
+    const result = await axios.post(`${BASE_URL}/google_login`, {
+      email: response.profileObj.email,
+      password: "4336498641-nqe16c7o3tit8osa5aj8mfl21rulj74r",
+      username: response.profileObj.name
     }, {withCredentials: true});
+    console.log(result.data);
     navigate('/posts')
   }
 
