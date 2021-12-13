@@ -170,3 +170,7 @@ hr{
 .realComment{
   margin-top: 20px;
 }
+
+.del{
+  cursor: pointer;
+}

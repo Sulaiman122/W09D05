@@ -19,6 +19,7 @@ const Post = () => {
     }
   };
 
+
   const sendComment = async (e) => {
     e.preventDefault();
     try {
@@ -63,10 +64,30 @@ const Post = () => {
     }
   };
 
-  useEffect(() => {
+  const DeleteComment = async (id)=>{
+    try {
+        const resp = await axios.delete(
+          `${BASE_URL}/comment/${id}`,
+          { withCredentials: true }
+        );
+        console.log(resp.data);
+        getComments();
+      } catch (err) {
+        console.error(err);
+      }
+  }
+
+
+  useEffect(async() => {
+    const user = await axios.get(`${BASE_URL}/user_available`, {
+        withCredentials: true,
+      });
     getPosts();
     getComments();
+    
   }, []);
+
+
   return (
     <div>
       <div className="home">
@@ -102,8 +123,7 @@ const Post = () => {
           <div className="numComment">
             <h3>{noComment} Comments</h3>
           </div>
-          {commments.length &&
-            commments.map((comment, index) => {
+          { commments?.map((comment, index) => {
               return (
                 <div className="realComment" key={index}>
                   <hr />
@@ -120,6 +140,7 @@ const Post = () => {
                         {comment.createdAt.slice(11, 16)}
                       </p>
                     </div>
+                    <p className="del" onClick={()=>DeleteComment(comment._id)}>❌</p>
                   </div>
                 </div>
               );
