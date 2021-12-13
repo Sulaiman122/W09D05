@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Nav from './Nav'
 
 const SignUp = () => {
   // get url of website from .env file

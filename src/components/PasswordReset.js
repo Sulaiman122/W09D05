@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
+import Nav from "./Nav";
 
 const PasswordReset = () => {
   const location = useLocation();
@@ -31,8 +32,8 @@ const PasswordReset = () => {
     try {
       const result = await axios.get(`${BASE_URL}/forgot/${token}`);
       if (result.data.success) {
-        setId(result.data.success)
-        setErro(false)
+        setId(result.data.success);
+        setErro(false);
       }
       if (result.data.error) {
         setErr(result.data.error);
@@ -48,40 +49,43 @@ const PasswordReset = () => {
   }, []);
 
   return (
-    <div className="home">
-      {!Erro ? (
-        <div className="formm">
-          <h1>Enter your new password</h1>
+    <div>
+      <Nav />
+      <div className="home">
+        {!Erro ? (
+          <div className="formm">
+            <h1>Enter your new password</h1>
 
-          <form onSubmit={reset}>
-            <label htmlFor="password">New Password:</label>
-            <input type="password" name="password" />
-            <label htmlFor="password2">Confirm New Password:</label>
-            <input type="password" name="password2" />
-            <button type="submit">Change Password</button>
-          </form>
-          <p>{err}</p>
-          <button
-            onClick={() => {
-              navigate("/");
-            }}
-          >
-            Back
-          </button>
-        </div>
-      ) : (
-        <div className="formm">
-          <h1>Error</h1>
-          <p>{err}</p>
-          <button
-            onClick={() => {
-              navigate("/");
-            }}
-          >
-            Back to home
-          </button>
-        </div>
-      )}
+            <form onSubmit={reset}>
+              <label htmlFor="password">New Password:</label>
+              <input type="password" name="password" />
+              <label htmlFor="password2">Confirm New Password:</label>
+              <input type="password" name="password2" />
+              <button type="submit">Change Password</button>
+            </form>
+            <p>{err}</p>
+            <button
+              onClick={() => {
+                navigate("/");
+              }}
+            >
+              Back
+            </button>
+          </div>
+        ) : (
+          <div className="formm">
+            <h1>Error</h1>
+            <p>{err}</p>
+            <button
+              onClick={() => {
+                navigate("/");
+              }}
+            >
+              Back to home
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

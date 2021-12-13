@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
+import Nav from './Nav'
 
 const Activated = () => {
   const navigate = useNavigate();
@@ -32,6 +33,8 @@ const Activated = () => {
   }, []);
 
   return (
+    <div>
+    <Nav />
     <div className="home">
       {!Erro ? (
         <div className="homeContainer">
@@ -59,6 +62,7 @@ const Activated = () => {
           </button>
         </div>
       )}
+    </div>
     </div>
   );
 };

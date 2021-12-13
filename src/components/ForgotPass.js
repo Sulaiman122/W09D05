@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Nav from './Nav'
 
 const ForgotPass = () => {
   const navigate = useNavigate();
@@ -25,6 +26,8 @@ const ForgotPass = () => {
   };
 
   return (
+    <div>
+    <Nav />
     <div className="home">
       <div className="formm">
         <h1>Why did you forget :(</h1>
@@ -45,6 +48,7 @@ const ForgotPass = () => {
           Back
         </button>
       </div>
+    </div>
     </div>
   );
 };

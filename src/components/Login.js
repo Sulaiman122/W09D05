@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Nav from './Nav'
 
 const Login = () => {
   const navigate = useNavigate();
@@ -26,6 +27,8 @@ const Login = () => {
   };
 
   return (
+    <div>
+    <Nav />
     <div className="home">
       <div className="formm">
         <h1>Login</h1>
@@ -49,6 +52,7 @@ const Login = () => {
           Back
         </button>
       </div>
+    </div>
     </div>
   );
 };

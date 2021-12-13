@@ -2,6 +2,8 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import GoogleLogin from 'react-google-login'
 import axios from "axios";
+import Nav from './Nav'
+
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 
@@ -21,6 +23,8 @@ const Home = () => {
   }
 
   return (
+    <div>
+    <Nav />
     <div className="home">
       <div className="homeContainer">
         <h1>Welcome to FlawBerry</h1>
@@ -49,6 +53,7 @@ const Home = () => {
           </button>
         </div>
       </div>
+    </div>
     </div>
   );
 };
