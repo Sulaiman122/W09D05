@@ -146,7 +146,7 @@ const Post = () => {
             Like:
             {currentUserLiked ? (
               <span id="heart" onClick={likePost}>
-                ❤️
+                🤍
               </span>
             ) : (
               <span onClick={likePost}>🤍</span>

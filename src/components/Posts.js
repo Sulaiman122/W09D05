@@ -43,7 +43,9 @@ const Posts = () => {
     const user = await axios.get(`${BASE_URL}/user_available`, {
       withCredentials: true,
     });
-    setUser(user.data.user._id);
+    if(user.data?.user?._id){
+      setUser(user.data.user._id);
+    }
     getPosts();
   }, []);
 
