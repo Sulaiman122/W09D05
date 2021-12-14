@@ -44,6 +44,7 @@ const Posts = () => {
       withCredentials: true,
     });
     if(user.data?.user?._id){
+      console.log('user id is ', user.data.user._id);
       setUser(user.data.user._id);
     }
     getPosts();
