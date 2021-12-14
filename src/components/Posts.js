@@ -13,7 +13,7 @@ const Posts = () => {
   const getPosts = () => {
     try {
       axios
-        .get(`${BASE_URL}/posts`, { withCredentials: true })
+        .get(`${BASE_URL}/posts`, { withCredentials: true, credentials: 'include' })
         .then((result) => {
           if (result.data.error) {
             seterror(result.data.error);
