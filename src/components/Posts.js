@@ -13,7 +13,7 @@ const Posts = () => {
   const getPosts = () => {
     try {
       axios
-        .get(`${BASE_URL}/posts`, { withCredentials: true, credentials: 'include' })
+        .get(`${BASE_URL}/posts`, { withCredentials: true, credentials: 'include', headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'}})
         .then((result) => {
           if (result.data.error) {
             seterror(result.data.error);

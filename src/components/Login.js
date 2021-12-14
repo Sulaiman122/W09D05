@@ -13,7 +13,7 @@ const Login = () => {
       const result = await axios.post(`${BASE_URL}/login`, {
         email: e.target.email.value,
         password: e.target.password.value,
-      }, {withCredentials: true, credentials: 'include',
+      }, {withCredentials: true, credentials: 'include', headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'}
     });
       if (result.data.err) {
         setErr(result.data.err);
