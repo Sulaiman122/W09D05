@@ -5,7 +5,8 @@ const Nav = () => {
   const navigate = useNavigate();
   const BASE_URL = process.env.REACT_APP_BASE_URL;
     const [userAvailable, setuserAvailable] = useState(false)
-
+    axios.defaults.withCredentials = true
+    
   useEffect(async() => {
     const user =await axios.get(`${BASE_URL}/user_available`, { withCredentials: true })
     console.log(user.data);
