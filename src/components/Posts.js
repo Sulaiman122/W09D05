@@ -8,7 +8,7 @@ const Posts = () => {
   const [User, setUser] = useState("");
   const BASE_URL = process.env.REACT_APP_BASE_URL;
   //   const token = SignIn.token;
-  const [error, seterror] = useState(false);
+  const [error, seterror] = useState('');
   const [posts, setPosts] = useState([]);
   const getPosts = () => {
     try {
@@ -16,7 +16,7 @@ const Posts = () => {
         .get(`${BASE_URL}/posts`, { withCredentials: true })
         .then((result) => {
           if (result.data.error) {
-            seterror(true);
+            seterror(result.data.error);
           } else {
             console.log(result.data);
             setPosts(result.data);
@@ -112,7 +112,8 @@ const Posts = () => {
           ) : (
             <button onClick={() => setAdd(true)}>Add Post</button>
           )}
-
+          {error}
+          {console.log(error)}
           {error ? (
             <p style={{ marginTop: "50px" }}>Kindly login first to see posts</p>
           ) : null}
