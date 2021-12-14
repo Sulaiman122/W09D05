@@ -8,7 +8,7 @@ const Posts = () => {
   const [User, setUser] = useState("");
   const BASE_URL = process.env.REACT_APP_BASE_URL;
   //   const token = SignIn.token;
-  const [error, seterror] = useState('');
+  const [error, seterror] = useState(false);
   const [posts, setPosts] = useState([]);
   const getPosts = () => {
     try {
@@ -16,7 +16,7 @@ const Posts = () => {
         .get(`${BASE_URL}/posts`, { withCredentials: true, credentials: 'include', headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'}})
         .then((result) => {
           if (result.data.error) {
-            seterror(result.data.error);
+            // seterror(result.data.error);
           } else {
             console.log(result.data);
             setPosts(result.data);
